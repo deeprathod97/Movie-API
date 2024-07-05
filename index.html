@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie-API</title>
+
+    <style>
+        .movie-card {
+        
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+
+</head>
+<body>
+   
+
+    <script>
+        fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=2af23e75ce26bd85d5697446c1bc2a6a')
+        .then(response => response.json())
+        .then(data => {
+            // cratea a div card
+
+            let array = data.results;
+            array.forEach(movie => {
+             
+                    let moviecard = document.createElement('div');
+                    moviecard.classList.add('movie-card');
+                   
+                   let movieTitle = document.createElement('h2'); // create H2
+                   movieTitle.textContent = movie.title; // send title value
+                   moviecard.appendChild(movieTitle); // append to moviecard
+                 
+                   let movieImage = document.createElement('img');
+                   movieImage.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+                   moviecard.appendChild(movieImage);
+
+                   // realase data span
+
+                   let releaseDate = document.createElement('span');
+                   releaseDate.textContent = movie.release_date;
+                   moviecard.appendChild(releaseDate);
+
+                // append to body
+                document.body.appendChild(moviecard);
+            });
+
+
+        });
+    </script>
+
+
+</body>
+</html>
